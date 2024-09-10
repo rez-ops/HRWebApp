@@ -1,0 +1,54 @@
+<app-sidebar></app-sidebar>
+<div class="container center-div">
+  <div class="form-container">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="pills" role="tabpanel" aria-labelledby="tab">
+        <form class="p-4" (ngSubmit)="create()" >
+
+          <!-- Date -->
+          <div class="form-outline mb-4">
+            <label class="form-label required" for="date">Date </label>
+            <input type="date" class="form-control border border-secondary" [(ngModel)]="ChangementHoraire.date" name="date" id="date" aria-label="Date" />
+          </div>
+
+          <!-- New Shift -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label class="form-label required" for="newShift">New Shift</label>
+              <select class="form-select form-control border border-secondary" [(ngModel)]="ChangementHoraire.idTypeShift" name="newShift" id="newShift" aria-label="New Shift">
+                <option value="0" disabled selected>Select new shift</option>
+                <option value="1">08 H - 16 H 30</option>
+                <option value="2">06 H - 14 H</option>
+                <option value="3">14 H - 22 H</option>
+                <option value="4">22 H - 06 H</option>
+              </select>
+            </div>
+          </div>
+
+          
+          <!-- Submit button -->
+          <button type="submit" class="btn custom-btn btn-block mb-3" >Submit</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Le message sera injecté ici -->
+      </div>
+    </div>
+  </div>
+</div>

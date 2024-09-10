@@ -1,0 +1,128 @@
+
+
+    <div class="container center-div">
+      <div class="form-container ">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="form-tab" role="tabpanel" aria-labelledby="form-tab">
+            <form class="p-4" (ngSubmit)="create()">
+              <h4>Créer une Commande:</h4>
+
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <label class="form-label required" for="entreType">Type de bon</label>
+                  <select class="form-select form-control border border-secondary" [(ngModel)]="comande.typeBon" name="entreType" id="entreType" aria-label="Type de bon">
+                  <option value="" disabled>Select Type de bon</option>
+                  <option value="Bon de sortie">Bon de sortie</option>
+                  <option value="Bon de retour">Bon de retour</option>
+                  </select>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label required" for="pieceType">Type de pièce</label>
+                  <select class="form-select form-control border border-secondary" name="pieceType" id="pieceType" aria-label="Type de pièce" [(ngModel)]="comande.typePiece">
+                    <option value="" disabled>Select</option>
+                    <option value="Pièce de rechange">Pièce de rechange</option>
+                    <option value="Consommable">Consommable</option>
+                  </select>
+                </div>
+              </div>
+
+              
+              <div class="row mb-4">
+                <div class="col-md-6">
+                  <label class="form-label required" for="department">Département :</label>
+                  <input type="text" class="form-control border border-secondary" name="department" id="department" aria-label="Department" placeholder="Département" (input)="onDepartmentInput($event)" [(ngModel)]="selectedDepartment" />
+                  <ul class="list-group" *ngIf="filteredDepartments.length > 0">
+                    <li class="list-group-item" *ngFor="let department of filteredDepartments" (click)="selectDepartment(department)">
+                      {{ department.nom }}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label" for="costCenter">Cost Center (KST) :</label>
+                  <input type="text" class="form-control border border-secondary" name="costCenter" id="costCenter" aria-label="Cost Center" placeholder="KST" [(ngModel)]="selectedCostCenter" readonly />
+                </div>
+              </div>
+
+              
+
+              <hr>
+              <h4>Article:</h4>
+              <form (ngSubmit)="ajouterArticle()">
+
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <label class="form-label required" for="machineZone">Machine / Zone :</label>
+                  <input type="text" class="form-control border border-secondary" name="machineZone" id="machineZone" aria-label="Machine / Zone" placeholder="Machine / Zone" (input)="onArticleInput($event)" [(ngModel)]="selectArticleNom" />
+                  <ul class="list-group" *ngIf="listArticle.length > 0">
+                    <li class="list-group-item" *ngFor="let article of listArticle" (click)="selectArticle(article)">
+                      {{ article.machine_zone }}
+                    </li>
+                  </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label required" for="reference">Référence :</label>
+                  <input type="text" class="form-control border border-secondary" name="reference" id="reference" aria-label="Référence" placeholder="Référence" [(ngModel)]="selectArticleReference" readonly />
+                  </div>
+                </div>
+                
+  
+                
+  
+                <div class="form-outline mb-4">
+                  <label class="form-label required" for="quantityRequested">Quantité demandée :</label>
+                  <input type="number" class="form-control border border-secondary" name="quantityRequested" id="quantityRequested" aria-label="Quantité demandée" placeholder="Quantité demandée" [(ngModel)]="quantityRequested" />
+                </div>
+                <button type="submit" class="btn custom-btn " >Ajouter article à la liste</button>
+              </form>
+              
+              
+              <div *ngIf="comande.articles.length > 0">
+                <hr>
+                <h4>Articles ajoutés :</h4>
+                <ul class="list-group mb-4">
+                  <li class="list-group-item" *ngFor="let article of comande.articles">
+                    {{ article.machine_zone }} - {{ article.reference }} - {{ article.quantiteDemander }}
+                  </li>
+                </ul>
+                <hr>
+              </div>
+              
+              <div class="form-outline mb-4">
+                <label class="form-label required" for="dateCreation">Date de création</label>
+                <input type="date" class="form-control border border-secondary" name="dateCreation" id="dateCreation" aria-label="Date de création" [(ngModel)]="comande.date" required />
+              </div>
+              <hr>
+              
+              <button type="submit" class="btn custom-btn  ">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Le message sera injecté ici -->
+      </div>
+    </div>
+  </div>
+</div>

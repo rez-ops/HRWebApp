@@ -1,0 +1,168 @@
+<app-sidebar></app-sidebar>
+<br><br><br><br>
+
+
+<!-- HTML -->
+<div class="row">
+  <div class="col-4">
+    <!-- Liste des onglets -->
+    <div class="list-group" id="list-tab" role="tablist">
+      <div class="list-group" id="list-tab" role="tablist">
+        <a class="list-group-item list-group-item-action" 
+           id="list-Conge-list" 
+           [class.active]="activeTab === 'list-Conge'" 
+           data-bs-toggle="list" 
+           href="#list-Conge" 
+           role="tab" 
+           aria-controls="Conge">Conge</a>
+        
+        <a class="list-group-item list-group-item-action" 
+           id="list-BadgeManquant-list" 
+           [class.active]="activeTab === 'list-BadgeManquant'" 
+           data-bs-toggle="list" 
+           href="#list-BadgeManquant" 
+           role="tab" 
+           aria-controls="BadgeManquant">Badge Manquant</a>
+  
+        <a class="list-group-item list-group-item-action" 
+           id="list-ChangementHoraire-list" 
+           [class.active]="activeTab === 'list-ChangementHoraire'" 
+           data-bs-toggle="list" 
+           href="#list-ChangementHoraire" 
+           role="tab" 
+           aria-controls="ChangementHoraire">Changement Horaire</a>
+  
+        <a class="list-group-item list-group-item-action" 
+           id="list-Permision-list" 
+           [class.active]="activeTab === 'list-Permision'" 
+           data-bs-toggle="list" 
+           href="#list-Permision" 
+           role="tab" 
+           aria-controls="Permision">Permision</a>
+  
+        <a class="list-group-item list-group-item-action" 
+           id="list-Componsation-list" 
+           [class.active]="activeTab === 'list-Componsation'" 
+           data-bs-toggle="list" 
+           href="#list-Componsation" 
+           role="tab" 
+           aria-controls="Componsation">Componsation</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <!-- Contenu des onglets -->
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="list-Conge" role="tabpanel" aria-labelledby="list-Conge-list">
+        <table class="table">
+          <caption>List of Conges</caption>
+          <thead>
+            <tr>
+              
+              <th scope="col">Type Conge</th>
+              <th scope="col">Date sortir </th>
+              <th scope="col">Date entre </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let conge of conges">
+              
+              <td>{{ conge.idTypeConge }}</td>
+              <td>{{ conge.dateSortie }}</td>
+              <td>{{ conge.dateEntre }}</td>
+            </tr>
+            
+        </table>
+      </div>
+      <div class="tab-pane fade" id="list-BadgeManquant" role="tabpanel" aria-labelledby="list-BadgeManquant-list">
+        <table class="table">
+          <caption>List of Badges</caption>
+          <thead>
+            <tr>
+              
+              <th scope="col">Date </th>
+              <th scope="col">entre </th>
+              <th scope="col">Sortie </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let badge of badges">
+              
+              <td>{{ badge.date}}</td>
+              <td>{{ badge.entre }}</td>
+              <td>{{ badge.sortie }}</td>
+            </tr>
+            
+        </table>
+      </div>
+      <div class="tab-pane fade" id="list-ChangementHoraire" role="tabpanel" aria-labelledby="list-ChangementHoraire-list">
+        <table class="table">
+          <caption>List of Changement Horaire</caption>
+          <thead>
+            <tr>
+              
+              <th scope="col">Date </th>
+              <th scope="col">shift </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let changementHoraire of ChangementHoraires">
+              
+              <td>{{ changementHoraire.date}}</td>
+              <td>{{ changementHoraire.idTypeShift }}</td>
+              
+            </tr>
+            
+        </table>
+      </div>
+      <div class="tab-pane fade" id="list-Permision" role="tabpanel" aria-labelledby="list-Permision-list">
+        <table class="table">
+          <caption>List of Permision</caption>
+          <thead>
+            <tr>
+              
+              <th scope="col">Date </th>
+              <th scope="col">shift </th>
+              <th scope="col">Du </th>
+              <th scope="col">Au </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let permision of permisions">
+              <td>{{ permision.date}}</td>
+              <td>{{ permision.idTypeShift }}</td>
+              <td>{{ permision.duHeure}}</td>
+              <td>{{ permision.auHeure }}</td>
+              
+            </tr>
+            
+        </table>
+      </div>
+      <div class="tab-pane fade" id="list-Componsation" role="tabpanel" aria-labelledby="list-Componsation-list">
+        <table class="table">
+          <caption>List of Componsation</caption>
+          <thead>
+            <tr>
+              
+              <th scope="col">Date </th>
+              <th scope="col">shift </th>
+              <th scope="col">Du </th>
+              <th scope="col">Au </th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let componsation of componsations">
+              <td>{{ componsation.date}}</td>
+              <td>{{ componsation.idTypeShift }}</td>
+              <td>{{ componsation.duHeure}}</td>
+              <td>{{ componsation.auHeure }}</td>
+              
+            </tr>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>

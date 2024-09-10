@@ -1,0 +1,80 @@
+
+<app-sidebar></app-sidebar>
+<div class="container center-div">
+  <div class="form-container">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="pills" role="tabpanel" aria-labelledby="tab">
+        <form class="p-4" (ngSubmit)="create()" >
+
+          <!-- Date Retour -->
+          <div class="form-outline mb-4">
+            <label class="form-label required" for="dateRetour">Date </label>
+            <input type="date" class="form-control border border-secondary" [(ngModel)]="badgeManquant.date"  name="date" id="date" aria-label="Date" />
+            
+          </div>
+
+          <!-- Entre Times -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label class="form-label">Entre</label>
+              
+              <label class="form-label required" for="entre">Entre</label>
+              <select class="form-select form-control border border-secondary" [(ngModel)]="badgeManquant.entre" name="entre" id="entre" aria-label="Type of Conge">
+                <option value="0" disabled selected>Select</option>
+                <option value="08 H" >08 H</option>
+                <option value="06 H">06 H</option>
+                <option value="14 H">14 H</option>
+                <option value="22 H">22 H</option>
+                
+              </select>
+              
+              
+            
+            </div>
+
+            <!-- Sortie Times -->
+<!-- Sortie Times -->
+<div class="col-md-6">
+  <label class="form-label">Sortie</label>
+  <select class="form-select form-control border border-secondary" [(ngModel)]="badgeManquant.sortie" name="sortie" id="sortie" aria-label="Sortie Times">
+    <option value="0" disabled selected>Select</option>
+    <option value="16 H 30">16 H 30</option>
+    <option value="14 H">14 H</option>
+    <option value="22 H">22 H</option>
+    <option value="06 H">06 H</option>
+  </select>
+ 
+</div>
+
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn custom-btn btn-block mb-3" [disabled]="!isFormValid()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Le message sera injecté ici -->
+      </div>
+    </div>
+  </div>
+</div>

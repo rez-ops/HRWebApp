@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .sidebar ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+}

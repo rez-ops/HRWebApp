@@ -1,0 +1,44 @@
+<br>
+<button class="sidebar-toggle" (click)="toggleSidebar()">☰</button> 
+<div class="sidebar" [ngClass]="{ 'showSidebar': isSidebarVisible, 'hideSidebar': !isSidebarVisible }" [@fadeInOut]>
+  <ul>
+    <br><br><br>
+
+    <li *ngIf="user.role === 'Admin'">
+      <a routerLink="/usersList" routerLinkActive="active">
+        <span class="menu-text">List des users</span>
+      </a>
+    </li>
+    
+    <li>
+      <a routerLink="/conge" routerLinkActive="active">
+        <span class="menu-text">Conges</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/badgeManquant" routerLinkActive="active">
+        <span class="menu-text">Badge Manquant</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/changementHoraire" routerLinkActive="active">
+        <span class="menu-text">Changement Horaire</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/permision" routerLinkActive="active">
+        <span class="menu-text">Permision</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/compensation" routerLinkActive="active">
+        <span class="menu-text">Compensation</span>
+      </a>
+    </li>
+    <li>
+      <a routerLink="/historique" routerLinkActive="active">
+        <span class="menu-text">Historique </span>
+      </a>
+    </li>
+  </ul>
+</div>

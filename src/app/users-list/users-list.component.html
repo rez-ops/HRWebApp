@@ -1,0 +1,380 @@
+<app-sidebar></app-sidebar>
+<br><br><br>
+<div class="d-flex justify-content-end my-4">
+  <button class="btn custom-btn" (click)="selectUserForAdd()">Add User</button>
+</div>
+
+<hr>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<div class="container bootstrap snippets bootdey">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="main-box no-header clearfix">
+        <div class="main-box-body clearfix">
+          <div class="table-responsive">
+            <table class="table user-list">
+              <thead>
+                <tr>
+                  <th class="text-center"><span>User</span></th>
+                  <th class="text-center"><span>Matricule</span></th>
+                  <th class="text-center"><span>Shift</span></th>
+                  <th class="text-center"><span>Direction</span></th>
+                  <th class="text-center"><span>Zone</span></th>
+                  <th class="text-center" title="le role de l'employé dans la société"><span>Role</span></th>
+                  <th class="text-center" title="Jour de congé passé"><span>JCP</span></th>
+                  <th class="text-center" title="Nmobre Jour Restant "><span>NJR</span></th>
+                  <th class="text-center" title="Maximum number of days of leave"><span>MNJC</span></th>
+                  
+                </tr>
+              </thead>
+              <tbody *ngFor="let user of users">
+                <tr >
+                  <td>
+                    <a href="#" class="user-link">{{ user.nom }} {{ user.prenom }}</a>
+                  </td>
+                  <td class="text-center">{{ user.matricule }}</td>
+                  <td class="text-center">{{ user.shift }}</td>
+                  <td class="text-center">{{ user.direction }}</td>
+                  <td class="text-center">{{ user.zone }}</td>
+                  <td class="text-center">{{ user.role }}</td>
+                  <td class="text-center">{{ user.totalLeaveDaysTaken }}</td>
+                  <td class="text-center">{{ user.maxLeaveDaysPerYear - user.totalLeaveDaysTaken }}</td>
+                  <td class="text-center">{{ user.maxLeaveDaysPerYear }}</td>
+                  
+                  <td style="width: 23%;">
+                    <a (click)="selectUserForUpdate(user)" class="btn table-link text-info">
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                    <a (click)="deleteUserById(user.id)" class="btn table-link danger">
+                      <span class="fa-stack">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                    <a (click)="toggleDetail(user)" class="btn">
+                      <span class="fa-stack">
+                        <i class="fa fa-chevron-down fa-lg" style="color:#270938"></i>
+                      </span>
+                    </a>
+                  </td>
+                </tr>
+                <tr *ngIf="user.showDetail && ouruser === user">
+                  <td colspan="10">
+                    <h5>Historique de  {{ ouruser.nom }} :</h5>
+                    <app-historique [user]="ouruser"></app-historique>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            
+            
+          </div>
+          
+          
+        </div>
+      </div>
+      
+      
+
+<!-- Update Modal -->
+<div class="modal fade custom-modal" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="updateUserModalLabel" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateUserModalLabel">Update User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('updateUserModal')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="updateUser()">
+          <!-- Première ligne : Nom et Prénom côte à côte -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="updateNom">Nom:</label>
+                <input type="text" id="updateNom" [(ngModel)]="selectedUser.nom" name="nom" class="form-control" required #updateNom="ngModel">
+                <div *ngIf="updateNom.touched && updateNom.invalid" class="alert alert-danger">
+                  <div *ngIf="updateNom.errors?.['required']">Nom is required!</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="updatePrenom">Prenom:</label>
+                <input type="text" id="updatePrenom" [(ngModel)]="selectedUser.prenom" name="prenom" class="form-control" required #updatePrenom="ngModel">
+                <div *ngIf="updatePrenom.touched && updatePrenom.invalid" class="alert alert-danger">
+                  <div *ngIf="updatePrenom.errors?.['required']">Prenom is required!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Deuxième ligne : Matricule et New Shift côte à côte -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="updateMatricule">Matricule:</label>
+                <input type="text" id="updateMatricule" [(ngModel)]="selectedUser.matricule" name="matricule" class="form-control" required #updateMatricule="ngModel">
+                <div *ngIf="updateMatricule.touched && updateMatricule.invalid" class="alert alert-danger">
+                  <div *ngIf="updateMatricule.errors?.['required']">Matricule is required!</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="newShift">New Shift</label>
+                <select class="form-select form-control border border-secondary" [(ngModel)]="selectedUser.shift" name="newShift" id="newShift" aria-label="New Shift">
+                  <option value="0" disabled selected>Select new shift</option>
+                  <option value="A">06 H - 14 H</option>
+                  <option value="B">08 H - 16 H 30</option>
+                  <option value="C">14 H - 22 H</option>
+                  <option value="D">22 H - 06 H</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Troisième ligne : Direction et Zone côte à côte -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="updateDirection">Direction</label>
+                <select class="form-select form-control border border-secondary" [(ngModel)]="selectedUser.direction" name="direction" id="updateDirection" required>
+                  <option value="0" disabled selected>Select Direction</option>
+                  <option value="direction 1">direction 1</option>
+                  <option value="direction 2">direction 2</option>
+                  <option value="direction 3">direction 3</option>
+                  <option value="direction 4">direction 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="updateZone">Zone:</label>
+                <select class="form-select form-control border border-secondary" [(ngModel)]="selectedUser.zone" name="zone" id="updateZone" required>
+                  <option value="0" disabled selected>Select zone</option>
+                  <option value="zone 1">zone 1</option>
+                  <option value="zone 2">zone 2</option>
+                  <option value="zone 3">zone 3</option>
+                  <option value="zone 4">zone 4</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quatrième ligne : Role et Total Leave Days Taken côte à côte -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="updateRole">Role:</label>
+                <select class="form-select form-control border border-secondary" [(ngModel)]="selectedUser.role" name="role" id="updateRole" required>
+                  <option value="0" disabled selected>Select Role</option>
+                  <option value="Admin">Admin</option>
+                  <option value="Role 2">Role 2</option>
+                  <option value="Role 3">Role 3</option>
+                  <option value="Role 4">Role 4</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="updateTotalLeaveDaysTaken">Jour de congé passé:</label>
+                <input type="number" id="updateTotalLeaveDaysTaken" [(ngModel)]="selectedUser.totalLeaveDaysTaken" name="totalLeaveDaysTaken" class="form-control" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cinquième ligne : Max Leave Days Per Year -->
+          <div class="col-md-6 ">
+            <label for="updateMaxLeaveDaysPerYear">Max nbr de jours de congé:</label>
+            <input type="number" id="updateMaxLeaveDaysPerYear" [(ngModel)]="selectedUser.maxLeaveDaysPerYear" name="maxLeaveDaysPerYear" class="form-control" required>
+          </div>
+          
+          <div class="button-container">
+            <!-- Boutons d'action -->
+          <button type="submit" class=" custom-btn   col-md-6">Save Changes</button>
+
+          <button type="button" class=" btn-1   col-md-6" (click)="closeModal('updateUserModal')">Cancel</button>
+          </div>
+          
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add User Modal -->
+<div class="modal fade custom-modal" id="addUserModel" tabindex="-1" role="dialog" aria-labelledby="addUserModelLabel" aria-hidden="true" data-backdrop="true" data-keyboard="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addUserModelLabel">Add User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal('addUserModel')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addUser()">
+
+
+          
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addNom">Nom:</label>
+                <input type="text" id="addNom" [(ngModel)]="newuser.nom" name="nom" class="form-control" required #addNom="ngModel">
+                <div *ngIf="addNom.touched && addNom.invalid" class="alert alert-danger">
+                  <div *ngIf="addNom.errors?.['required']">Nom is required!</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addPrenom">Prenom:</label>
+                <input type="text" id="addPrenom" [(ngModel)]="newuser.prenom" name="prenom" class="form-control" required #addPrenom="ngModel">
+                <div *ngIf="addPrenom.touched && addPrenom.invalid" class="alert alert-danger">
+                  <div *ngIf="addPrenom.errors?.['required']">Prenom is required!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addMatricule">Matricule:</label>
+                <input type="text" id="addMatricule" [(ngModel)]="newuser.matricule" name="matricule" class="form-control" required #addMatricule="ngModel">
+                <div *ngIf="addMatricule.touched && addMatricule.invalid" class="alert alert-danger">
+                  <div *ngIf="addMatricule.errors?.['required']">Matricule is required!</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="newShift">New Shift</label>
+                <select class="form-select form-control border border-secondary" [(ngModel)]="newuser.shift" name="newShift" id="newShift" aria-label="New Shift" required>
+                <option value="0" disabled selected>Select new shift</option>
+                <option value="A">06 H - 14 H</option>
+                <option value="B">08 H - 16 H 30</option>
+                <option value="C">14 H - 22 H</option>
+                <option value="D">22 H - 06 H</option>
+              </select>
+              </div>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addPassword">Password:</label>
+            <input type="password" id="addPassword" [(ngModel)]="newuser.password" name="password" class="form-control" required #addPassword="ngModel">
+            <div *ngIf="addPassword.touched && addPassword.invalid" class="alert alert-danger">
+              <div *ngIf="addPassword.errors?.['required']">Password is required!</div>
+            </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addConfPassword">Confirm Password:</label>
+            <input type="password" id="addConfPassword" [(ngModel)]="confpassword" name="confPassword" class="form-control" required #addConfPassword="ngModel" (ngModelChange)="validatePasswords()">
+            <div *ngIf="addConfPassword.touched && addConfPassword.invalid" class="alert alert-danger">
+              <div *ngIf="addConfPassword.errors?.['required']">Confirm password is required!</div>
+            </div>
+            <div *ngIf="addConfPassword.touched && !validatePasswords()" class="alert alert-danger">
+              <div>Passwords do not match!</div>
+            </div>
+              </div>
+            </div>
+          </div>
+          
+          
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="addDirection">Direction</label>
+              <select class="form-select form-control border border-secondary" [(ngModel)]="newuser.direction" name="direction"   id="addDirection" required>
+                <option value="0" disabled selected>Select Direction</option>
+                <option value="direction 1">direction 1</option>
+                <option value="direction 2">direction 2</option>
+                <option value="direction 3">direction 3</option>
+                <option value="direction 4">direction 4</option>
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label required" for="addZone">Zone:</label>
+              <select class="form-select form-control border border-secondary" [(ngModel)]="newuser.zone" name="zone"   id="addZone" required>
+                <option value="0" disabled selected>Select zone</option>
+                <option value="zone 1">zone 1</option>
+                <option value="zone 2">zone 2</option>
+                <option value="zone 3">zone 3</option>
+                <option value="zone 4">zone 4</option>
+              </select>
+              </div>
+            </div>
+          </div>
+          
+
+
+
+
+
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label class="form-label required" for="addRole">Zone:</label>
+              <select class="form-select form-control border border-secondary" [(ngModel)]="newuser.role" name="role"   id="addRole" required>
+                <option value="0" disabled selected>Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="Role 2">Role 2</option>
+                <option value="Role 3">Role 3</option>
+                <option value="Role 4">Role 4</option>
+              </select>
+            </div>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addTotalLeaveDaysTaken">Jour de congé passé:</label>
+                <input type="number" id="addTotalLeaveDaysTaken" [(ngModel)]="newuser.totalLeaveDaysTaken" name="totalLeaveDaysTaken" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="addMaxLeaveDaysPerYear">Max nbr de jours de congé:</label>
+                <input type="number" id="addMaxLeaveDaysPerYear" [(ngModel)]="newuser.maxLeaveDaysPerYear" name="maxLeaveDaysPerYear" class="form-control" required>
+              </div>
+            </div>
+          </div>
+          <div class="button-container">
+            <button type="submit" class=" custom-btn   col-md-6">Add User</button>
+            <button type="button" class=" btn-1   col-md-6" (click)="closeModal('addUserModel')">Cancel</button>
+          </div>
+          
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+

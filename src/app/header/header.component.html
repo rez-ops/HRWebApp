@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-toolbar">
+    <div class="container-fluid">
+        <!-- Navbar Brand -->
+        <a class="navbar-brand mx-auto" href="/login" onclick="clearLocalStorage()">SUMITOMO ELECTRIC BORDNETZE</a>
+
+        <!-- Navbar Toggler for Mobile View -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Navbar Links -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav" *ngIf="showNavbar">
+            <ul class="navbar-nav">
+                <!-- First Link -->
+                <li class="nav-item">
+                    <a routerLink="/magasin" class="navbar1 "  routerLinkActive="active">Magasin Central</a>
+                </li>
+                <!-- Second Link -->
+                <li class="nav-item">
+                    <a routerLink="/sidbar" class="navbar1 "  routerLinkActive="active">Formilaire D'Enregistrement</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div *ngIf="!isLoginPage" class="d-flex flex-column align-items-end my-4">
+            <div>
+                Hello {{user.nom}} {{user.prenom}}
+            </div>
+            <div class="text-muted">
+                Role : {{user.role}}
+            </div>
+        </div>
+    </div>
+</nav>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">

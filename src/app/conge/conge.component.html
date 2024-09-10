@@ -1,0 +1,56 @@
+<app-sidebar></app-sidebar>
+<div class="container center-div">
+  <div class="form-container">
+    <div class="tab-content">
+      <div class="tab-pane fade show active" id="pills" role="tabpanel" aria-labelledby="tab">
+        <form class="p-4" (ngSubmit)="create()">
+          
+          <div class="form-outline mb-4">
+            <label class="form-label required" for="typeConge">Type Conge</label>
+            <select class="form-select form-control border border-secondary" [(ngModel)]="conge.idTypeConge" name="typeConge" id="typeConge" aria-label="Type of Conge" required>
+              <option value="0" disabled selected>Select new shift</option>
+              <option *ngFor="let type of congeTypes" [value]="type.id">{{ type.typeName }}</option>
+            </select>
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label required" for="dateSortie">Date Sortie</label>
+            <input type="date" class="form-control border border-secondary" [(ngModel)]="conge.dateSortie" name="dateSortie" id="dateSortie" aria-label="Date Sortie" required />
+            
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label required" for="dateRetour">Date Retour</label>
+            <input type="date" class="form-control border border-secondary" [(ngModel)]="conge.dateEntre" name="dateRetour" id="dateRetour" aria-label="Date Retour" required />
+            
+          </div>
+          
+
+          <!-- Submit button -->
+          <button type="submit" class="btn custom-btn btn-block mb-3" >Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Le message sera injecté ici -->
+      </div>
+    </div>
+  </div>
+</div>
+

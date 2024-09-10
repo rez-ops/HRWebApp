@@ -1,0 +1,112 @@
+/* Toolbar Styles */
+.custom-toolbar {
+  background-color: #296a65; /* Toolbar background color */
+  border-radius: 0; /* Remove rounded corners (acute corners) */
+  box-shadow: 20px 5px 10px #b9b9b9, -5px -5px 10px #ffffff; /* Neumorphism shadow */
+  padding: 10px;
+  height: 90px; 
+  color: #ffffff; /* Text color for the toolbar */
+  border: none; /* Remove any border */
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color:#296a65!important; /* Ensure navbar background color is consistent */
+  padding: 18px 70px; /* Padding for spacing */
+  position: fixed; /* Fix the navbar at the top */
+  top: 0; /* Align it to the top */
+  width: 100%; /* Make sure it spans the full width */
+  z-index: 1000; /* Ensure it stays above other content */
+  border: none; /* Remove any border */
+  border-radius: 0; /* Remove rounded corners */
+}
+
+/* Body Styles */
+body {
+  color: rgb(255, 255, 255); /* Text color for the body */
+  padding-top: 80px; /* Add padding to prevent content from being hidden under the navbar */
+}
+
+/* Navbar Brand */
+.navbar-brand {
+  font-size: 1.5rem; /* Adjust font size for the brand */
+  font-weight: bold; /* Make the brand text bold */
+  color: #ffffff; /* White color for the brand text */
+  text-align: center; /* Center the brand text */
+  margin-left: 0; /* Reset any left margin */
+  margin-right: 0; /* Reset any right margin */
+  padding: 18px 20px;
+  
+  font-family: "Playwrite CU", cursive;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+
+
+.navbar1 {
+  font-size: 0.8rem; /* Adjust font size for the brand */
+  font-weight: unset; /* Make the brand text bold */
+  color: #ffffff; /* White color for the brand text */
+  text-align: center; /* Center the brand text */
+  margin-left: 0; /* Reset any left margin */
+  margin-right: 0; /* Reset any right margin */
+  padding: 18px 15px; 
+  transition: color 0.3s ease, font-size 0.3s ease; /* Smooth transition for color and font size */
+}
+
+.navbar1:hover {
+  font-size: 1.2rem; /* Slightly increase font size on hover */
+  color: #080808; /* Change text color on hover */
+  transition: color 0.3s ease, font-size 0.3s ease; /* Ensure the transition effect is applied on hover */
+}
+
+
+
+
+/* Centering and Spacing */
+.navbar-nav {
+  justify-content: center; /* Center the links within the navbar */
+}
+
+/* Responsive Navbar Toggle */
+.navbar-toggler {
+  border: none; /* Remove border */
+  background: none; /* Remove background */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,..."); /* Custom toggle icon if needed */
+}
+
+/* Custom Spacing */
+.ms-auto {
+  margin-left: auto; /* Pushes links to the right */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ a {
+  color: #d4d4d4;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+ a.active {
+  color: #000000;
+  font-size: 1.2rem;
+  
+}

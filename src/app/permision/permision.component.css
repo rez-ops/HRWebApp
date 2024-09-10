@@ -1,0 +1,41 @@
+.center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.form-container {
+ /* 
+
+ */
+ max-width: 550px;
+  width: 90%;
+  padding: 70px;
+  background:rgb(255, 255, 255);
+  box-shadow: 0px 10px 10px 10px #dbd2f4;
+  border-radius: 10px;
+  box-sizing: border-box;
+  flex-direction: column;
+  display: flex;
+}
+
+.form-control {
+  border-width: 5px; /* Personnalisez l'épaisseur de la bordure */
+  border-radius: 5px; /* Personnalisez le rayon de la bordure */
+}
+
+
+
+
+.custom-btn {
+  background-color: #296a65;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #ffffff; /* Lighten the color for hover effect */
+  border: 1px solid  #296a65;
+  color:  #296a65;
+}

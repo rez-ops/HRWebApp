@@ -1,0 +1,36 @@
+/* Modifier la couleur de fond de l'élément */
+.list-group-item {
+  background-color: #f8f9fa; /* Couleur de fond personnalisée */
+  color: #296a65; /* Couleur du texte */
+  border: 1px solid #ddd; /* Couleur de la bordure */
+  border-radius: 0px; 
+  padding: 15px; 
+  transition: background-color 0.3s ease; 
+}
+
+/* Modifier la couleur de fond et le texte lors du survol */
+.list-group-item:hover {
+  background-color: #296a65; 
+  color: #ffffff;
+}
+
+/* Modifier le design de la classe `list-group-item-action` */
+.list-group-item-action {
+  cursor: pointer; 
+  font-weight: bold; 
+  transition: transform 0.3s ease;
+}
+
+/* Ajouter une animation lors du survol */
+.list-group-item-action:hover {
+  transform: scale(1.05);
+  background-color: #296a65; 
+  color: #fff5f5; 
+}
+
+/* Modifier les éléments actifs */
+.list-group-item.active {
+  background-color: #296a65; 
+  color: white;
+  border-color: #296a65; 
+}
